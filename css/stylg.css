@@ -1,0 +1,61 @@
+
+
+body {
+	max-width: 	100%;
+	margin:		5px auto;
+	text-align:	center;
+	background: #234;
+	color: 		#ddd;
+}
+
+table {
+	border: 		5px solid #ccc;
+	border-radius: 8px;
+	text-align:	center;
+	margin:		auto;
+}
+
+td {
+	border: 		1px solid #aaa;
+	border-radius: 4px;
+	background: #113;
+	width: 		80px;
+	height: 		80px;
+	padding: 	10px;
+	margin: 		auto;
+}
+
+div.insideTable {
+	background: darkred;
+	border:		solid;
+	border-radius: 15px;
+	font-family:Arial;
+	font-size: 	3em;
+	margin:		auto;
+	text-align: center;
+	vertical-align: middle;
+	
+	animation-name: quickflash;
+   animation-duration: 0.1s;
+
+}
+
+@keyframes quickflash {
+    from {background-color: DarkOrange;}
+    to {background-color: darkred;}
+}
+
+
+p#info {
+	padding: 	5px;
+}
+
+input, button {
+	font-size:	1.2em;
+	border-radius:4px;
+	margin: 		5px;
+}
+
+input {
+	width:		100px;
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html><html xml:lang="pl" dir="ltr" lang="pl">	<head><meta charset="UTF-8"><link rel="stylesheet" type="text/css" href="css/stylg.css"></head><body>
+
+<div id="operation_area"><h3>Ascending Order Puzzle</h3>
+<p>Numbers maximum range: <input id="userInput" type="number" value="15"></input><button id="userInputSubmit">Randomize</button></p>
+<p id="info">Rearrange numbers in ascending order.</p>
+<table>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>	
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>	
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+</table>
+</div>
+</body></html>
+<script>
+
+var randomRange = [];
+for (var i = 0; i < 16; i++) {
+	randomRange[i] = parseInt(Math.random()*15*2)+1; 
+}
+
+window.onload = initFunction;
+
+function initFunction () {
+	document.getElementById("userInput").onkeydown = onInputEnter;
+	document.getElementById("userInputSubmit").onclick = onInputEnter;
+	initializeTable();
+}
+
+function initializeTable () {
+	insertDivs();
+	var divs = document.getElementById("operation_area").getElementsByTagName("div");
+	for (var i=0;i<divs.length;i++) {
+		divs[i].onclick = swapNumbers;
+	}
+}
+
+function myCreateElement (tagType, id) {
+	var myElement = document.createElement(tagType);
+	myElement.className = "insideTable";
+	myElement.innerText	= id;
+	return myElement;
+}
+
+function insertDivs () {
+	var area = document.getElementById("operation_area");
+	var elements = area.getElementsByTagName("TD");
+	for (var i = 1; i < elements.length; i++) {
+//		elements[i].appendChild( myCreateElement("DIV",i) );
+		elements[i].appendChild( myCreateElement("DIV",randomRange[i] ) );
+	}
+}
+
+function swapNumbers (e) {
+	var empty = document.getElementById("operation_area").querySelector("TD:empty");
+	empty.appendChild(e.target);
+	checkOrder();
+}
+
+function checkOrder () {
+	var elements = document.getElementById("operation_area").getElementsByTagName("div");	
+	var correctFlag = false;
+	for (var i = 0; i < elements.length-1; i++) {
+		var val1 = Number(elements[i].innerText);
+		var val2 = Number(elements[i+1].innerText);
+		if ( val2 < val1) {
+			correctFlag = false;
+			document.getElementById("info").style.background = "";
+			document.getElementById("info").innerText = "Numbers are not in ascending order.";
+			break;
+		}	else {
+			correctFlag = true;
+		}
+	}
+	if (correctFlag) {
+		document.getElementById("info").style.background = "green";
+		document.getElementById("info").innerText = "Fine! All numbers are in ascending order.";
+	}
+}
+
+function onInputEnter (e) {
+	if (e.keyCode === 13 || e.keyCode == null) {
+		var value1 = Number (document.getElementById("userInput").value);
+		for (var i = 0; i < 15; i++) {
+			document.getElementById("operation_area").getElementsByTagName("div")[i].innerText =  parseInt( Math.random()*value1)+1   ; 
+		}
+	}
+	document.getElementById("info").style.background = "";
+	document.getElementById("info").innerText = "Rearrange numbers in ascending order.";
+}
+</script>
